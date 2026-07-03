@@ -1,18 +1,16 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
+import rehypeHighlight from 'rehype-highlight'
+import 'highlight.js/styles/atom-one-dark.css'
 import { resolveSrc, isVideo } from '@/lib/path'
-
-function encodePath(path: string) {
-  return path.split('/').map((s) => encodeURIComponent(s)).join('/')
-}
 
 export default function MarkdownRenderer({ content }: { content: string }) {
   return (
     <div className="prose-custom">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
+        rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
           a: ({ href, children, ...props }) => (
             <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
