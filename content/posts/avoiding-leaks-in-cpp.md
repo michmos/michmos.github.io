@@ -163,3 +163,5 @@ valgrind <path_to_your_executable>
 
 Similar to address sanitizers it will provide you with a clear overview at the end.
 
+# Conclusion
+By following the described best practices most leaks can be avoided from the beginning in C++. Tools such as valgrind and AddressSanitizer can help to find the remaining leaks especially when linked with unit testing and integration testing. At the end it remains the responsibility of the programmer to adhere to these best practices and write memory-safe code.
