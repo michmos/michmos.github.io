@@ -8,11 +8,21 @@ export default function DarkModeToggle() {
 
   useEffect(() => {
     setMounted(true)
-    const stored = localStorage.getItem('theme')
-    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setDark(true)
-      document.documentElement.classList.add('dark')
+
+    function syncFromStorage() {
+      const stored = localStorage.getItem('theme')
+      const shouldBeDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      setDark(shouldBeDark)
+      if (shouldBeDark) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
     }
+
+    syncFromStorage()
+    window.addEventListener('pageshow', syncFromStorage)
+    return () => window.removeEventListener('pageshow', syncFromStorage)
   }, [])
 
   const toggle = () => {
