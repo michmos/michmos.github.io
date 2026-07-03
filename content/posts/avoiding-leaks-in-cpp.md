@@ -1,6 +1,6 @@
 ---
 title: "How to avoid leaks in modern C++"
-date: "2026-06-01"
+date: "2025-04-17"
 description: "Idioms, techniques and tools used to prevent and catch memory leaks"
 thumbnail: ""
 pinned: false
@@ -149,10 +149,10 @@ std::shared_ptr<int> shared = weakPtr.lock();
 ```
 
 ## Tooling
-Last but not least, let's have a look at some tooling that can help you discover memory leaks inside your code. I will focus on the two options I use the most. Both of them also help discover other forms of memory related bugs like out of bound access.
+Last but not least, let's have a look at some tooling that can help you discover memory leaks inside your code. I will focus on the two options I use the most. Both of them also help discover other forms of memory related bugs like out-of-bounds access.
 
 ### AddressSanitizer
-AddressSanitizer adds shadow memory to your program that helps tracking allocations and deallocations. For this it needs to be compiled into your program by adding the compile flag `-fsanitize=address`. After you ran the program or if a crash occurs, the sanitizer will provide you with a clear overview in case there was any issue - telling you the stack trace and the size of the leak.
+AddressSanitizer adds shadow memory to your program that helps track allocations and deallocations. For this, it needs to be compiled into your program by adding the compile flag `-fsanitize=address`. After you ran the program or if a crash occurs, the sanitizer will provide you with a clear overview in case there was any issue - telling you the stack trace and the size of the leak.
 
 On the downside, it slows down your program quite a bit and changes your actual binary. Also it can only catch bugs in the code it was actually compiled into - linked libraries might leak undetected.
 
